@@ -1,0 +1,28 @@
+The binary was compiled under emx 0.9c with fix 4 under OS/2 Warp 4 with Fixpack 6.  I do not know if this will run under Warp 3 but I'm sure if you compile it for the EMX you have it should though....  It seems to run well for me at home on this lil 486 with 16Mb RAM.  I have changed some of the preallocation since my server isn't going to be handling traffic like on Efnet.
+
+All the changes I made to the source I #ifdef'd it, so it should still compile on other platforms but I'm not guaranteeing it!!
+
+For this version of ircd, I used autoconf 2.12 patchlevel 5 for OS/2.  Many thanx for that program as I found that porting made life alot easier than my earlier ports.  Still would love to see OS/2 being defined, so that alot of this extra work porting over the code doesn't have to be done ;-)
+
+Roger Haskins
+nth.tech@iname.com
+irc.ca.webbnet.org ports 6660-6669
+http://www.smartt.com/~nth   <----- Internet Explorer free zone!!!
+
+You can put the binary in any directory you want to run the daemon in.
+
+======================================================================
+
+       --------------- How to run a simple server ------------------
+    
+       create a directory, for example c:\ircd
+       copy ircd.exe there
+       copy doc\example.conf to c:\ircd\ircd.conf
+       edit that ircd.conf configuration file
+       run ircd and thats it.
+
+       -------------------------------------------------------------
+       
+======================================================================
+
+Check your \emx\include\arpa\inet.h with the .\emx\include\inet.h that I included with this source if you are having problems compiling or linking this daemon.  Made a few slight changes since I first released it.  I am not impressed with the warnings that are present during compilation, but I do not have the time to clean it up.  The ircd-hybrid ports compiled without 1 warning, but then the code is sooo much cleaner!!  If you want to help clean up the code or if you, please e-mail me and send a copy of your source.

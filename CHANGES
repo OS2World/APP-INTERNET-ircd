@@ -1,0 +1,460 @@
+Saturday February 21st, 1998 10:42am GMT dal4.6.5.DreamForge -DuffJ
+* basically bug fix release of dreamforge
+* SCO UNIX and Red Hat 5.0 Linux should now compile df smoothly
+* help files updated and expanded
+* casetable high-bit flipping bug (oh no!) fixed *phew!*
+* df will now compile on boxes without snprintf
+* other bug fixes - unkline readded, kill path
+  truncation bug fixed
+
+Monday January 19 1998 -- 20:02 -08:00 dal4.6.3.DreamForge -wd
+* Finally, release dreamforge!
+* Various minor bugfixes, changes, etc.
+* Added 'dalnet-keys.pgp' file containing DALnet PGP keys.
+
+Sunday December 28 1997 4:20pm dal4.6.2.DreamForge -wd
+* Rolling the first "Release" of dreamforge.
+* Added wd-lusers patch, sacrifice 100% accuracy of lusers for performance
+  gain.
+* Added the script.ini supressor patch, along with it a Config option
+  to enable/disable, and a token letter in the version reply to signify
+  its inclusion/exclusion.
+* Added wd-malloc patch, should slightly boost performance for FreeBSD
+  2.2.2+ DALnet servers (anything below 2.2.2 is untested, i don't even
+  know if the patch will work, but it won't hurt)
+* Added X:line patch via NikB (See doc/example.conf)
+
+Saturday Dec 27th 12:15am dal4.6.1.DreamForge -DuffJ
+* completely separated flags and usermodes.
+  sptr->flags is now
+  sptr->flags for flags, and sptr->umodes for usermodes
+
+Friday Dec 26th (Merry Christmas!) 12:05am df-r4-fix4 -DuffJ
+* bug fix in m_join() that allowed desynchs due to incomplete
+  channelname length checking. Fix by Dianora via Barubary
+* /whois reply now returns this format:
+  "foo is an IRC operator" OR
+  "foo is an IRC operator - Services Administrator" OR
+  "foo is an IRC operator - Server Administrator"
+* when an admin sets usermode +A, he is now automatically
+  set +a aswell.
+* /notice @+#channel implemented
+* connect time notices \r added, improved wording.
+* ns,cs,ms + os shortcut aliases removed (thanks ns)
+* help.c updated
+* chatops implemented (from darkrot)
+  /mode JoeOper +b
+  /chatops blahblahblah
+  identical to globops
+* restart and die removed from * and global oper flags
+	
+Thu Nov 20 22:09:14 EET 1997 Donwulff (donwulff@iki.fi)
+* fixed merge-conflict with resync-burst NICK's
+* FREEMODE changed, see channel.h for remarks
+
+Wed Nov 19 21:53:31 EET 1997 Donwulff (donwulff@iki.fi)
+* fixed an old bug involving remote modes with > 6 parameters
+* added in #definable FREEMODE to allow "unlimited" sized resync-burst
+  MODE's - this would improve throughput, but requires the above fix first
+  propagated
+* made m_oper now reject saltless passwords
+* msgmap is now an array of pointers to msgtab entries; fixed a bug
+* added in the changes-list for dal4.4.17
+* QUIT-comments no longer buffer-overflow...
+* /whois now doesn't display extra dots
+* removed extra newlines from the end of HelpOp replies
+
+Mon Nov 17 16:36:27 EET 1997 Donwulff (donwulff@iki.fi) for dreamforge-r4
+* fixed the version number, now 'dal4.5.17.r4' instead of dal4.4.17...
+* tried to mark the authors of biggest changes in code as per GNU license
+* changed my own e-mail address references to donwulff@iki.fi...
+
+Tue Nov  4 18:48:41 EET 1997 Donwulff (donwulff@iki.fi)
+* Nuked find_userserv() function completely, nick@server now relies on hash
+* Added in Wizzu's patch to fix the PASS->services interface as intended
+* Included taz's preliminary code to shorten /whois
+* Removed the preliminary support for server timestamps; not finished
+* Oops, donwulff-dbuffix ended up twice there; removed the other one
+* Imported in the fastbuf-branch, tested code from Undernet
+
+Tue Oct 14 16:36:21 EDT 1997 Donwulff (donwulff@iki.fi)
+* Imported changes from between dal4.4.12 and dal4.4.13:
+  + parse.c on 4.4.13's favour, return 0 from fake dir
+  + s_serv.c m_server() server-collide: combined
+  + s_user.c m_kill() saw no difference in anUnknownUser
+* aliased HELP to HELPOP so that it's usable without scripts
+
+dreamforge-r3:
+* moved TRACE from 'A' to 'b', leaving 'A' and 'a' free
+* dbuf_put() returns if nothing to do
+* fixed a relapse of nospoof 'unreg-client-nick-change' crash
+
+Fri Aug 22 10:13:07 EDT 1997 Donwulff <donwulff@iki.fi>
+* Now default to very streamlined hash-function instead of the ELF-hash
+* Added in some of the Undernet optimizations for dopacket()
+* Fixed a bug in debugmode hashtable rehashing memory allocation
+* Added in a notify for invites thru bans etc.
+* m_hash now requires IrcOp privs
+* Removed 'hashv' from both channel and client-structs, we don't use raw hashes
+
+Thu Aug 21 23:03:38 PDT 1997 darkrot, entered by Cabal95
+	* Masskill patch to let opers /kill nick1,nick2,nick3
+	* Kill messages now display the user@host of the user killed
+
+Wed Aug 20 17:44:24 EDT 1997 Donwulff <donwulff@iki.fi>
+* Invites by channel-ops (or U-lined) now allow passing thru +b and +l too
+* Now enforce a limit for invites-per-channel too
+* Add invites to the _top_ of list in all cases, expire from _bottom_
+
+Wed Aug 20 13:43:42 EDT 1997 Donwulff <donwulff@iki.fi>
+* Link-slab allocator, allocate 4k of Links at time, reuse
+* Break Bans out of Link-structures for further memory savings
+* Put flush_connections() back at the end of the mainloop
+* Add some blocking-checking, now use #defines for those
+* Remove an extra space from resync-burst modes
+* Move to use PJW/ELF hashing-routine, slightly slower but better
+* Fix display of memory used by bans in /stats z
+* Add elementary ignores to HelpOp system
+* Add over-rides to HelpOp system
+* Add a "frontpage" to HelpOp system
+* Moved make_nick_user_host() and check_string() to s_misc.c
+* HelpOps now use numerics to avoid errors from "buggy" clients.
+* sendto_common_channels() streamlined now that zombies are removed
+* Double-insert checking in DEBUGMODE or if INSERTCHECK defined
+* Bytes counter for /stats m fixed? (No idea what the old code tried...)
+* Numerics-handler now has debug code to try to catch weirdness
+* userid@server-messages now *forwarded* for non-IrcOp's
+* The new Hash-function now "documented" better...
+* /rehash will now empty the global HelpOp ignore-list on server
+* HelpOp ignore-list now uses properly DupSring() & make_link()
+* The /list handler has been made to scan thru topics as well
+* IsService now made to return 0 and let the optimizer sort it out
+* Same thing with zombie-stuff, since we don't use zombies anymore
+
+Sun Aug 10 12:13:34 PDT 1997
+	* client structures now keep track of related whowas entries
+	  themselves.  off_history was eating up the most CPU, now it
+	  doesn't.
+	* /stats l   correctly displays server connections, again.
+
+Thu Aug  7 22:50:41 PDT 1997 Cabal95
+	* Added new undernet-like /list handler by Rakarra
+	* Removed fake direction notices/splits
+
+Wed Aug  6 16:58:22 PDT 1997 Cabal95
+	* Many misc changes
+	* Removed alarm() calls; some bugs in Config script running in
+	  auto config mode; nickchange delay(3 seconds)
+	* Increased hash table sizes
+
+Tue Aug  5 17:52:10 PDT 1997 Cabal95
+	* PROTOCTL - changed it back to =. :P  Apperently Undernet is only
+	  talking about it and hasn't done it yet.  I like = better :-)
+	* WATCH system appears to be working under some mild testing.
+
+Tue Aug  5 00:26:42 PDT 1997 Cabal95
+	* Added Donwulff's WATCH system in, untested as of yet.
+	* Changed PROTOCTL to use : instead of = for Undernet(?)
+	  compatibility.
+
+Mon Aug  4 19:49:41 PDT 1997 Cabal95
+	* Heard from them, general agreement. PROTOCTL msg now is sent
+	  only after the connection logs in, servers get "PROTOCTL" and
+	  clients get numeric 005.
+	* Token system setup and working - yeah! :-) (Donwulff)
+
+Sun Aug  3 22:35:25 PDT 1997 Cabal95
+	* First draft of protoctl finished, waiting to hear from others
+	  on making a change in the way PROTOCTL is communicated.
+	* SQUIT is (hopefully) completed, appears to work fine, so that
+	  is a good thing. :-) (Aetobatus)
+
+Changes from 4.4.15 to 4.4.17:
+        * SVSNOOP is restricted to services, not *from* services and allowed by
+          everyone else.. Anyone can disable all your O: lines in 4.4.15.
+        * Temporary K-lines are able to be removed again.
+        * Users cannot set themselves -r as they could before.
+        * +R channels show more than "Cannot join channel."
+        * Users off channel cannot change topic on -t channels.
+        * Nickname changes not affected if nickname to change to is already in
+          use.
+        * Config option to specify whether or not users can see /stats o.
+        * Other minor bug fixes.
+
+Sun Oct  27 21:34:21 EDT 1997 Various, entered by David Kopstain
+	* Changes for 4.4.15
+	* New user modes. 'a', 'A,' 'r' and 'R'
+	  - 'a' represents a services admin. This is set by the server 
+            upon opering. This +a allows ircops to do any normal command 
+            that a services admin can do.
+	  - 'A' represents a server admin. This flag shows that you are
+            the owner of your server.
+	  - 'r' means that you are identified to acc2 of a registered 
+            nick.
+	  - 'R' means acc3
+          - a and A are settable O:flags in ircd.conf
+	* New channel modes. 'r' and 'R'. 
+	  - 'R' is for users to close the channel to only registered
+	    nicks.
+	  - 'r' set by services to track registered nicks
+	* New NICK protocol
+          - server<->server protocol changes in the aspect that right
+	  before the gecos is displayed, a services tracking number is put
+	  in place.
+	  - client<->server protocol changes in the aspect of when an
+	  initial client connects, if it sends a 2nd argument in the nick
+	  line (NICK taz JIM), "JIM" is sent to services as a nick
+	  password and if the password matches, services will reply.
+	* New SAMODE command
+	  - IRC Operators with the 'a' flag can now change channel modes
+	    with the SAMODE command
+	* Nick Flood protection
+	  - Normal users cant nick flood anymore. This does not apply to
+	    opers
+	* Mass invite/mass message protection
+	  - Normal users can only message/invite 20 targets withing 120
+	    seconds. This does not apply to opers.
+	* donwulff's dbuf check. 
+	* SVSNOOP command
+	  - Services can remotely disable a servers O:lines
+	* SQLINE command
+	  - Services can send out a common set of qlines to all servers
+	* New /whois information
+	  - New fields for SA's, admins and registered nicks
+	* /ns, /cs, /os, /ms, /nickserv, /chanserv, /operserv, /memoserv
+	  aliases
+	*  /identify
+	   - Automatically parsed to the appropriate service.
+	* /stats q
+	  - Shows all Services QLines
+	* /LUSERS addition
+	  - Current local users:  69  Max: 1243
+	  - Current global users:  12362  Max:18004
+	* SVSKILL command
+	  - Used by services to send a non nick chasing kill directly to
+	    the clients server.
+	* SVSNICK command
+	  - User by services to change a clients nickname. This will be
+            used instead of killing the client when nick kill is enforced.
+	* allowance for normal users to /msg nick@full.server.dal.net
+	  for security purposes.
+	* SVSMODE command
+	  - Used by services to change certain user modes, like +r for
+	    registered nicks, or +d to set a services timestamp. ONLY
+	    U:Lined servers can use this command.
+	* Changes in Config to define your network services name, etc.
+	* The Quit: patch. All quitting clients exit with "Quit: <reason>"
+	* Rakarra's opernick patch.  Shows the o-line that the person used
+	  to /oper: *** Notice -- NickInOline (CurrentNick!user@host) is
+	  now operator (O)
+	* New, more efficient command parsing routine (JK, Cabal95,
+	  Donwulff, taz)
+
+
+Sun Oct  5 20:17:51 EDT 1997 Various, entered by Mikko Hänninen
+	* Changes for 4.4.13
+	* Changes to the connect time notices:
+          - connect problems contact resource shown always if defined,
+            either an URL (CONNECT_URL define) or email address
+            (CONNECT_EMAIL define), old nospoof message (and NS_ADDRESS
+            define) removed
+          - nospoof CTCP version request "from" field changed to
+            %X!nospoof@servername format
+          - numeric 001 shows Nick!user@host instead of just nick
+	* /stats m, l and w show additional info (cpu time) when
+          compiled in debug mode (the checkload3 patch): 
+          - /stats m shows CPU cycles used by command
+          - /stats l shows CPU cycles used by connection, replacing
+            the idle time
+          - /stats w shows estimated ircd CPU usage
+	* Server exists -errors report show additional info: where the
+          existing server is connected from
+	* Invisible opers (+io) no longer shown with /trace for
+          non-opers (-o)
+	* /kill allows multiple targets (nick1,nick2,nick3) and show
+	  the killed client's address in the Nick!user@host format
+          (the mkil6 patch)
+        * Kill patch truncated to first . on servernames.
+        * example.conf's Y:Line section has been updated to what the
+          routing team has requested
+        * Config script has the right version in it now :)
+        * Fixed bug in operflag system, wallop and locop access used
+          the same flag bit, oops
+        * Fixed compile errors for the WIN32 platform, now is error
+          free
+        * Fake direction notices removed, fake direction splits removed
+
+Sun Sep 21 18:21:52 EDT 1997 Various, entered by Mikko Hänninen
+	* Changes for 4.4.12
+	* Fix for crashing bug in the /server command
+
+	* Changes for 4.4.11
+	* Win32 compiling support
+
+Mon May  5 13:52:37 HST 1997 Cabal95, entered by Michael Sawyer
+	* Changes for 4.4.10
+	* Minor bug fixes for /stats L and a test to disallow
+	  funky host names (with @'s in them).
+
+Sun May  4 20:20:44 HST 1997 Various, entered by Michael Sawyer
+	* Changes for 4.4.9
+	* JK's qualify-match patch
+	* Fix to K-line message in quit message
+	* Some new additional modes (CLIENT, KILL, FLOOD)
+	* Timed k-line patch
+	* Hostile username patch
+	* LOCOPS
+
+Mon Feb 10 21:07:03 EST 1997 Michael Sawyer <aetobat@dal.net>
+	* Fix problem in password testing of SERVER command
+	* Add ability to use different case tables, safely
+	* Prohibit most commands beforeregistration complete.
+
+Fri Nov 29 04:16:15 1996  Michael Graff  <Michael Graff <explorer@flame.org>>
+
+	* Changes for 3.2.6:
+
+	* Make it almost unnecessary to edit the Makefile or include/config.h
+	anymore.  Config now asks questions, and stores the answers in
+	a file called Options.  The theory is this file can be copied into
+	a new version and pathnames and other options will get defaults
+	from it.
+
+	* Make nospoof code optional.  Many servers do NOT need it, and
+	some clients break badly with it.  Thank you, Netscrape...
+
+Changes for 3.2.5
+Sun Nov 24 04:39:57 1996  Michael Graff <explorer@flame.org>
+	* Remove 2-second client connect delay.
+	* Print "Client exited" not "error 0"
+
+Changes with dal4.3.3 (Barubary - barubary@dal.net,
+                       Donwulff - donwulff@iki.fi)
+Bugfix version and anti-hacking/spoofing
+
+* Spaces in kline comments (not akills!) are converted to _ instead of 
+hiding them totally.  find_kill exits for a non-akill kline the message 
+*** You are not welcome on this server: reason  Email kline@dal.net...
+* Deleted #wallops from the source code completely
+* Added md5-based anti-spoofing system
+* Fixed channel mode hacking
+* Fixed various memory leaks
+* Stopped certain commands while unregistered
+* Fixed WHOWAS bugs
+* Fixed problem with PONG (part of nospoof)
+* Fixed "ghost kline" bug
+* Added dn_skipname for BSDI systems (check src/Makefile)
+* chkconf now shows line error is on (Magel)
+* Config - script now tries to set up libraries properly (Magel)
+* Made dropping out USER server<->server protocol messages mandatory
+
+Changes with dal4.3.2 (Russell - russell@dal.net)
+Port of Fake Direction fix to dal4.3; special thanks to 
+Roddy for pointing out that it wasn't in there already
+
+* Fixed Fake Direction caused by m_error
+
+Changes with dal4.3.1 (Donwulff - donwulff@iki.fi)
+
+* Fixed @-in-username bug
+
+Changes with dal4.3 (Donwulff - donwulff@iki.fi)
+Alpha on performance fixes while waiting for dal4.5
+
+* Added Roddy's ircd.doc into doc/ directory
+* Tripled hash table sizes in hash.c and hash.h
+* Optimized hashing function in hash.c
+* Removed extraneous debug data from hash.c in non-debugmode
+* Numerous minor performance increases in hash.c
+* Added /hash m in DEBUGMODE for getting list.c memory usage summary
+* Removed maximum nickname limit from USERHOST
+* Added optionally matched address part to ISON - no wildcards in nick
+* Optionally drops USER protocol messages from server-server (Barubary)
+* Ident replies with @ are now refused
+* Added +h mode that can be set when you're opered
+* Parameters following /quote help are sent to all +h
+* Starting writing a help database to /quote help
+* Improved version control
+
+Changes with 2.8.21.mu3.dal4.2 (Russell - Russell@dal.net)
+Minor bugfix revision
+
+* Removed hack and netride wallops - and finally did it *right*
+* Users can no longer hide from opers by joining an invisible channel
+* Only hubs will send out the connection established global
+* Connect globals are now working right.
+* Miscellanous bugs are fixed.
+
+Changes with 2.8.21.mu3.dal4 (Russell - Russell@dal.net)
+
+* Added new user mode "g" that does the following:
+	*notices all +og users with failed and/or succesful oper attempts 
+	on all servers
+	*notices all +og users with failed server connection attempts
+	*moves miscellanous other things anyone can see.
+* RAKILL command that allows ulined servers to remove an autokill as 
+	easily as it adds one.
+* Added support for temporary klines.
+* defined new A: class of klines (for autokill).  These are meant to
+	be services managed.
+* UNKLINE command allowing opers to remove k:lines by address.
+* Allow quote KLINE by address
+* Hacked STATS K to distinguish between permanent and temporary klines.
+* GOPER command allows a ulined client to broadcast all opers whether or not
+        any other flags are enabled.
+* GLOBOPS command allows opers to broadcast over GLOBAL messages, thereby 
+	depreciating wallops.  Wallops behavior stays the same though.
+* patch to allow the proper propagation of autokills.
+* Masks server notices that show PRIVMSGs
+* Masks the password from the failed oper attempt messages
+* Removed those annoying NET.RIDE and HACK notices
+* Allow opers to take quarantined nicks.
+* Fixed away bug that sends blank away messages on netjoin
+* Patch to allow opers to see invisible users on a /who
+* any oper can see all connections on any server in a /trace
+* Miscellaneous bug fixes.
+
+Changes with 2.8.21.mu3.dal3 (Lefler - lefler@dal.net):
+
+* Added modeless channels (starting with character +)
+* Now allows comments on channel parts
+* Changed TOPIC timestamp code to avoid unneccessary changes [NOTE: 
+  TOPICs are now incompatible with versions prior to dal2]
+* Q line can now exclude nicks (from the local server only)
+* Added a STATS X function that shows what C lines are not currently
+  active (i.e. missing servers)
+* Will now WALLOP all +w users when a server connects or disconnects
+  from the network
+* Added AKILL command, which allows U lined servers to establish
+  temporary global K lines.
+* New KLINE command; operators can now temporarily add K lines to
+  the server
+* Fixed a missing feature (bug?) where you could change nicks while banned
+  if the channel was moderated. Side effect of this fix is that noone
+  can now change nicks when banned, even chanops.
+* NOTE is gone for good. May it rest in peace.
+* Tidied up STATS K to work with spaces in the comment field (it turns the
+  field into a * if there are spaces), so you can use ircii's /stats k
+  handler as well as spaces.
+* New example.conf file with DALnet defaults
+
+Changes with 2.8.21.mu3.dal2a (Lefler - lefler@dal.net):
+
+* Fixed bug in AWAY resynch where only the first word would be shown.
+* New Solaris IRCDLIBS defnition in the Makefile [Pipis]
+
+Changes with 2.8.21.mu3.dal2 (Lefler - lefler@dal.net):
+
+* Allows users behind U lined servers to make mode changes, topic changes,
+  invites and kicks regardless of whether the user is allowed to or not.
+* Gets rid of HACK notices for mode changes from U lined servers.
+* Sends AWAY info in response to SERVER message where appropirate.
+* Resynchs TOPICs on net rejoins. Resvoles conflicts using the older topic
+  (using time/date stamp info).
+* Makes NPATH (the NOTE function) #undef by default.
+* Some tidying up of code distribution.
+* New features from irc2.8.21 and mu3.2.
+
+Changes with 2.8.20.mu2+Dal (Dalvenjah - dalvenjah@dal.net):
+
+* Allows non-chanops to see bans.

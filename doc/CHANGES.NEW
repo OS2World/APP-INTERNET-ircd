@@ -1,0 +1,33 @@
+New features in dal4.6.2:
+	* Updates from dal4.4.17 included, as well as a few extra "bonuses"
+	* script.ini fix installed
+	* See CHANGES for alot more info
+	* WATCH system implemented with a hardcoded max of 128 entries
+	  per notify list.
+	* PROTOCTL system - compatible(I hope) with Undernet protocols.
+	* Token system for both server<->server and server<->client is
+	  ready and working.
+	* NOQUIT protocol working, 2 connected servers that support the
+	  system no longer need to send individual QUITs during a split.
+	  Will work when other non-NOQUIT servers are present on the
+	  network as well.
+	* Channel-ops and U-lined servers can now invite other people thru
+          bans and limits, but not thru channel keys. A notice is issued to
+          all channel-ops when this happens.
+	* Several small optimizations for more efficient and faster
+	  memory-usage, off-history, as well as invites and hashing.
+	* KILL now allows multiple-target target-list, and adds user@host
+	  automatically to kill reason. Kill paths are shortened.
+	* HELPOP system now has a frontpage, allows question-only and
+	  broadcast-only modes to users, and ignores to helpops. HelpOps now
+	  use numerics.
+	* Sendto_common_channels (quit/nick-change) optimized. Zombies and
+	  services defined out of code to let optimizer sort it out.
+	* LIST now produces new channels only at the rate accepted by the
+	  user, keeps clients from flooding out and memory-usage low.
+	  Undernet parameters and wildcards supported.
+	* client@server-message _forwarding_ enabled for non-IrcOp's.
+	* STATS l correctly displays client connections (again?)
+	* Other: Removed extra space from channel-mode bursts, /stats z now
+	  displays size of bans correctly, /stats m now displays command
+	  sizes correctly. Fake directions gone, alarm()s gone...

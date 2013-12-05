@@ -1,0 +1,21 @@
+Please remember:
+
+* If you are using a precompiled binary of the DALnet ircd server, PLEASE
+  check it and make sure it does not reference DALnet before using it.
+
+* Do *not* run this version on the Efnet or any other net other than
+  DALnet - it is *incompatible*. Please HEED this warning!
+
+* PLEASE remember to add these U lines to your conf. BEFORE starting your
+  server: 
+
+U:services.dal.net:*:*
+
+* All the information you need on the patches is in the file README.patches
+
+* Remember to add the lines suggested in your .ircrc to obtain the full benefit
+  of your server patches. Distribute the lines to your users too! Check the
+  file ADD-TO-IRCRC for the new additions.
+
+* You might want to go thru Run's server compile guide in case you have
+  compilation problems. The file is doc/server-compile-guide.
